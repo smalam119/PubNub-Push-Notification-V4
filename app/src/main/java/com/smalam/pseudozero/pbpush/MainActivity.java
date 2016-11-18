@@ -6,19 +6,28 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import android.content.SharedPreferences;
+
 import android.preference.PreferenceManager;
+
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,11 +48,26 @@ public class MainActivity extends AppCompatActivity {
         StartRegistrationService("unregister");
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(AppEvent event){
+        if(event.is("token received")){
+            regBtn.setVisibility(View.GONE);
+            unregBtn.setVisibility(View.VISIBLE);
+            Logger.d(event.msg);
+        }
+        if(event.is("token removed")){
+            regBtn.setVisibility(View.VISIBLE);
+            unregBtn.setVisibility(View.GONE);
+            Logger.d(event.msg);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         if(!settings.getString(Config.TOKEN,"").isEmpty())
@@ -70,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
                     //Displaying if registration is complete
                     if (token != null) {
                         Snackbar snackbar = Snackbar
-                                .make(findViewById(android.R.id.content), "Registration complete", Snackbar.LENGTH_LONG);
+                                .make(findViewById(android.R.id.content), "Registered, Subscribed for push notification", Snackbar.LENGTH_LONG);
 
                         snackbar.show();
                     } else {
                         Snackbar snackbar = Snackbar
-                                .make(findViewById(android.R.id.content), "Not registered", Snackbar.LENGTH_LONG);
+                                .make(findViewById(android.R.id.content), "Unregistered", Snackbar.LENGTH_LONG);
 
                         snackbar.show();
                     }

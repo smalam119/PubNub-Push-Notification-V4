@@ -11,6 +11,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/ASL2.0'
+        }
     }
     buildTypes {
         release {
@@ -33,4 +42,6 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     compile 'com.google.firebase:firebase-messaging:9.6.0'
     compile 'com.android.support:design:24.2.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile group: 'com.pubnub', name: 'pubnub', version: '4.2.0'
 }
