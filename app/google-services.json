@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "930554319484",
+    "firebase_url": "https://syd19-fff37.firebaseio.com",
+    "project_id": "syd19-fff37",
+    "storage_bucket": "syd19-fff37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930554319484:android:8e96bd094ebf37a7",
+        "android_client_info": {
+          "package_name": "com.smalam.pseudozero.pbpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930554319484-94ipumflv1j4vbrthb7qo44h5v731vbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBImp1tepe0-GdOHjI619dFEuEEGeZgPKo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

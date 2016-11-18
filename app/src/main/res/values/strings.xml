@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Pb Push</string>
+    <string name="reg">Register</string>
+    <string name="unreg">Unregister</string>
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="gcm_unregister_message">Token unsubscribed from GCM and notification server. You will no longer
+    get any notification.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="unregistering_message">Un-registering Notification Service...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server. Please refresh.</string>
 </resources>
