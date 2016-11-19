@@ -11,6 +11,7 @@ import android.media.RingtoneManager;
 
 import android.net.Uri;
 
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -22,19 +23,20 @@ import com.orhanobut.logger.Logger;
  * Created by SAYED on 11/18/2016.
  */
 
-public class FcmListenerService extends FirebaseMessagingService {
+public class FcmListenerService extends com.google.android.gms.gcm.GcmListenerService {
+
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-
-        String message = remoteMessage.toString();
+    public void onMessageReceived(String from, Bundle data)
+    {
+        String message = data.getString("msg_for_mobile");
         if(message != null) {
             Logger.d(message);
         }
-        //Displaying a notification with the message
-        sendNotification(remoteMessage.toString());
+        //Displaying a notiffication with the message
+        sendNotification(message);
     }
+
 
     private void sendNotification(String message) {
         Intent intent = new Intent(this, MainActivity.class);
