@@ -25,5 +25,19 @@ Using service like Pubnub removes the hassle of creating and setting up a webser
 
 ## How push notification is implemented using pubnub
 Step 1 and 2 remains the same. Now client will subscribe to a pubnub channel using the registration id and channel name. So, if any data is emitted to the channel pubnub 
-sends the id and message to the GCM server. GCM sends the notification to all the registered devices listening to the channel. da-ta!!! no need
-to setup a personal webserver.
+sends the id and message to the GCM server. GCM sends the notification to all the registered devices listening to the channel. da-ta!!! no need to setup a personal webserver.
+
+## Lets get our hands dirty
+
+## Set up FCM
+Go to (https://console.firebase.google.com) and create a new project.From the project dashboard add your android project to firebase by providing your project package name.Download the configuration file (google_services.json) go to android studio and copy it to your app root module directory. To your project level build.gradle file add
+
+```
+classpath 'com.google.gms:google-services:3.0.0'
+```
+and to app level build.gradle file
+
+```
+compile 'com.google.firebase:firebase-messaging:9.6.0'
+```
+now sync the gradle. Now if we go to (https://console.developers.google.com/), under credentials there will be three key automatically generated. The server key is needed to connect FCM service to Pubnub.
