@@ -51,4 +51,4 @@ compile group: 'com.pubnub', name: 'pubnub', version: '4.2.0'
 
 ```
 Lets move to (https://admin.pubnub.com/#/login) and create a new project. In the project dashboard turn on Mobile push notification and 
-put the FCM server key on the GCM API key field. (It should be written FCM API key. They should call their front-end developers). Remember to save the changes.
+put the FCM server key on the GCM API key field. (It should be written FCM API key. They should call their front-end developers). Remember to save the changes. A publish and a subscribe key will be provided.
