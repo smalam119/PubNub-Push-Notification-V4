@@ -51,4 +51,43 @@ compile group: 'com.pubnub', name: 'pubnub', version: '4.2.0'
 
 ```
 Lets move to (https://admin.pubnub.com/#/login) and create a new project. In the project dashboard turn on Mobile push notification and 
-put the FCM server key on the GCM API key field. (It should be written FCM API key. They should call their front-end developers). Remember to save the changes. A publish and a subscribe key will be provided.
+put the FCM server key on the GCM API key field. (It should be written FCM API key. They should call their front-end developers). Remember to save the changes. A publish and a subscribe key will be provided. Upto this point all the required API's are intregated. So now we can move to the coding part.
+
+## Classes
+we need below four classes
+1. MainActivity: We will initialize and control the view here. Call the FCMRegistrationIntentService and create a broadcast service which will receive the token when GCM sends it.
+
+2. FCMRegistrationIntentService: It will extends a IntentService. In it's onHandleIntent method we are going to get the token from the instanceId by sending the sender id. We also configure Pubnub here.
+
+```
+PNConfiguration pnConfiguration = new PNConfiguration();
+        pnConfiguration.setSubscribeKey(Config.SUB_KEY);
+        pnConfiguration.setPublishKey(Config.PUB_KEY);
+        pnConfiguration.setSecure(false);
+        mPubnub = new PubNub(pnConfiguration);
+```
+pubnub subscribe and publish key provided in the dashboard is required here. After successfully received the registration token it should be added to the pubnub object.
+
+```
+private void enablePushOnChannel(String regId,String channelName) {
+        //adding regId to pubnub channel
+        mPubnub.addPushNotificationsOnChannels()
+                .pushType(PNPushType.GCM)
+                .channels(Arrays.asList(channelName))
+                .deviceId(regId)
+                .async(new PNCallback<PNPushAddChannelResult>() {
+                    @Override
+                    public void onResponse(PNPushAddChannelResult result, PNStatus status) {
+                        if (status.isError()) {
+                            Logger.d("Error on push notification" + status.getErrorData());
+                        } else {
+                            Logger.d("Push notification added ");
+                        }
+                    }
+                });
+
+    }
+```
+4. FcmListenerService: Mainly responsible for receiving the message from FCM server. It has a onMessageReceived method which gets the message and upon receiving createa a notification to alert the user.
+
+5.MyInstanceIDListenerService: Basically responsible start the registration service when token needs to be refreshed.
