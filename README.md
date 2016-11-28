@@ -4,8 +4,7 @@
 This is an implementation of pubnub push notification using GCM (cough...FCM) for android. PubNub is a real time data stream service. 
 It has a Java SDK which offers real time push notification service.Implimentation is quiet straight forward and Pubnub official 
 documentation has a step by step instruction. But upgrading the SDK from v3 to v4 some previous defination and method doesnot work 
-anymore. Though V4 has documentation for push notifications but those are only provided in code snipets. Moreover Google shifted from GCM to FCM
-which creates a little bit of confusion. So in this project push notification for android client is implemented using Pubnub v4 and FCM.
+anymore. Though V4 has documentation for push notifications but those are only provided in code snipets. Moreover Google shifted from GCM to FCM which creates a little bit of confusion. So in this project to make things easier push notification for android client is implemented using Pubnub v4 and FCM.
 
 ## Libraries used
 * Pubnub 4.2.0
