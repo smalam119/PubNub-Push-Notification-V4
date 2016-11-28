@@ -54,11 +54,11 @@ Lets move to (https://admin.pubnub.com/#/login) and create a new project. In the
 put the FCM server key on the GCM API key field. (It should be written FCM API key. They should call their front-end developers). Remember to save the changes. A publish and a subscribe key will be provided. Upto this point all the required API's are intregated. So now we can move to the coding part.
 
 ## Classes
-we need below four classes
+we need below classes
 
-1. MainActivity: We will initialize and control the view here. Call the FCMRegistrationIntentService and create a broadcast service which will receive the token when GCM sends it.
+* MainActivity: We will initialize and control the view here. Call the FCMRegistrationIntentService and create a broadcast service which will receive the token when GCM sends it.
 
-2. FCMRegistrationIntentService: It will extends a IntentService. In it's onHandleIntent method we are going to get the token from the instanceId by sending the sender id. We also configure Pubnub here.
+* FCMRegistrationIntentService: It will extends a IntentService. In it's onHandleIntent method we are going to get the token from the instanceId by sending the sender id. We also configure Pubnub here.
 
 ```
 PNConfiguration pnConfiguration = new PNConfiguration();
@@ -90,5 +90,5 @@ private void enablePushOnChannel(String regId,String channelName) {
     }
 ```
 
-3. FcmListenerService: Mainly responsible for receiving the message from FCM server. It has a onMessageReceived method which gets the message and upon receiving createa a notification to alert the user.
-4. MyInstanceIDListenerService: Basically responsible start the registration service when token needs to be refreshed.
+* FcmListenerService: Mainly responsible for receiving the message from FCM server. It has a onMessageReceived method which gets the message and upon receiving createa a notification to alert the user.
+* MyInstanceIDListenerService: Basically responsible start the registration service when token needs to be refreshed.
