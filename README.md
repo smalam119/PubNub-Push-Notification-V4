@@ -55,6 +55,7 @@ put the FCM server key on the GCM API key field. (It should be written FCM API k
 
 ## Classes
 we need below four classes
+
 1. MainActivity: We will initialize and control the view here. Call the FCMRegistrationIntentService and create a broadcast service which will receive the token when GCM sends it.
 
 2. FCMRegistrationIntentService: It will extends a IntentService. In it's onHandleIntent method we are going to get the token from the instanceId by sending the sender id. We also configure Pubnub here.
@@ -88,6 +89,6 @@ private void enablePushOnChannel(String regId,String channelName) {
 
     }
 ```
-4. FcmListenerService: Mainly responsible for receiving the message from FCM server. It has a onMessageReceived method which gets the message and upon receiving createa a notification to alert the user.
 
-5.MyInstanceIDListenerService: Basically responsible start the registration service when token needs to be refreshed.
+3. FcmListenerService: Mainly responsible for receiving the message from FCM server. It has a onMessageReceived method which gets the message and upon receiving createa a notification to alert the user.
+4. MyInstanceIDListenerService: Basically responsible start the registration service when token needs to be refreshed.
